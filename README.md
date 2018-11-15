@@ -1,2 +1,2 @@
 # wf
-wold finder task
+word finder task
