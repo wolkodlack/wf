@@ -34,7 +34,7 @@ class Searcher:
         """
         print(" # Line search")
         for line_num in range(0, self._matrix.size):
-            line = self._matrix.get_line(line_num)
+            line = self._matrix.get_row(line_num)
             self._line_search(line_num, line)
 
     def _search_in_columns(self):
@@ -55,11 +55,11 @@ class Searcher:
         print(" # Search LeftTop -> RightBottom")
         word = ''
         for num in range(0, self._matrix.size):
-            line = self._matrix.get_row_lt_rb(num)
+            line = self._matrix.get_diagonal_lt_rb(num)
             self._line_search(num, line)
 
         for num in range(self._matrix.size, self._matrix.size * 2 - 1):
-            line = self._matrix.get_row_lt_rb(num)
+            line = self._matrix.get_diagonal_lt_rb(num)
             self._line_search(num, line)
 
         return word

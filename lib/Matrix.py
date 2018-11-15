@@ -50,60 +50,56 @@ class Matrix:
                 print(" {} ".format(ch), end='')
             print()
 
-    def get_line(self, line_number):
+    def get_row(self, line_number):
         """
-        Returns line of matrix by it num from top to bottom.
+        Returns row of matrix by it num from top to bottom.
         :param line_number:
         :return:
         """
         if line_number < 0 or line_number > len(self._data):
-            return ""
+            raise Exception("Dimension error in {} -> {}".format(__name__, self.get_row.__name__))
 
         line = self._data[line_number]
         return ''.join(line)
 
     def get_column(self, column_number):
         """
-        Returns column of matrix by it num from top to bottom.
+        Returns column of matrix by it num from left to right.
         :param column_number:
         :return:
         """
         if column_number < 0 or column_number > self.size:
-            return ""
+            raise Exception("Dimension error in {} -> {}".format(__name__, self.get_column.__name__))
 
         column = [row[column_number] for row in self._data]
 
         return ''.join(column)
 
-    def get_row_lt_rb(self, row):
+    def get_diagonal_lt_rb(self, row):
         """
-        Returns data from diagonal row. I.e. from left-top to right-bottom.
+        Returns data from diagonal line. I.e. from left-top to right-bottom.
         :param row:
         :return:
         """
-
-        # print("i:{} j:{}".format(i, j))
         word = ''
         if row < self.size:
             c = 0
             r = row
             while c < self.size:
                 word += self.get_char(r, c)
-                # print("line:{} col:{} row:{} --> {}".format(row, c, r, word) )
+                # print("line:{} col:{} row:{} --> {}".format(row, c, r, word))
 
-                if row < self.size:
-                    c += 1
-                    r -= 1
+                c += 1
+                r -= 1
 
-                if r < 0:
+                if r < 0:   # Overflow condition
                     break
         else:
             c = row - self.size + 1
             r = self.size - 1
             while c < self.size:
-                # print(" >>> line:{} col:{} row:{} --> ".format(row, c, r) )
                 word += self.get_char(r, c)
-                # print("line:{} col:{} row:{} --> {}".format(row, c, r, word) )
+                # print("line:{} col:{} row:{} --> {}".format(row, c, r, word))
 
                 c += 1
                 r -= 1

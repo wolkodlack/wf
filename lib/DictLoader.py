@@ -1,6 +1,6 @@
 
-## Dictionary analisys:
-##
+# -> Dictionary analysis:
+#
 # local:wolkodlack@wdnote:/media/media/proj/DataRobot/wf[0]$ cat words.txt | sed 's/./#/g' | sort | uniq -c
 # 64 ##
 # 584 ###
@@ -32,7 +32,7 @@ class DictLoader:
 
     def __init__(self, name):
         """
-
+        Init
         :param name:
         """
         self.file_name = name
@@ -40,7 +40,7 @@ class DictLoader:
 
     def _load(self):
         """
-
+        Loads dictionary from file
         :return:
         """
         with open(self.file_name) as fp:
@@ -53,24 +53,17 @@ class DictLoader:
                 # print("Line: {}:{}".format(_len, line))
 
         print('Dictionary statistics:')
-        for key in self._data.keys():
+        for key in sorted(self._data.keys()):
             c = len(self._data[key])
-            print("world length:{} count:{}".format(key, c))
+            print("word length:{} -> count words:{}".format(str(key).ljust(2), c))
         print()
 
-    def get_by_length(self, length, default=None):
+    def search(self, word):
         """
-        Check by count key
-        :param length:
-        :param default:
+        Does search word in dictionary
+        :param word:
         :return:
         """
-        if length in self._data:
-            return self._data[length]
-
-        return default
-
-    def search(self, word):
         length = len(word)
 
         if length in self._data.keys():

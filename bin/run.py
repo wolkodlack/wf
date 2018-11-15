@@ -28,8 +28,6 @@ if __name__ == '__main__':
                         nargs='?', const='localhost', default=15, type=int)
     args = parser.parse_args()
 
-    print(args)
-
     words = DictLoader('words.txt')
     mx = Matrix(args.size)
     s = Searcher(mx, words)
